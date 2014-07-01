@@ -1,0 +1,25 @@
+{
+  "name": "takedown",
+  "version": "0.0.0",
+  "description": "Democratic Distributed Denial of Service",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wnr/takedown.git"
+  },
+  "author": "Lucas Wiener <lucas@wiener.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wnr/takedown/issues"
+  },
+  "homepage": "https://github.com/wnr/takedown",
+  "devDependencies": {
+    "bower": "^1.3.5",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
+  }
+}
